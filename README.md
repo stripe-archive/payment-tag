@@ -6,9 +6,12 @@ It'll take care of building credit card inputs, validation, error handling, and 
 
 ## Usage
 
-To use the Payment Tag, first <a href="https://s3.amazonaws.com/payment-tag/v1.0.1.zip">download the required JavaScript</a>. Then, include the library in your HTML's `<head>`. The CSS is optional&mdash;feel free to override it in your own pages. The Payment Tag also requires <a href="http://jquery.com/">jQuery</a>, which you'll need to include if you haven't already done so.
+To use the Payment Tag, first <a href="https://github.com/stripe/payment-tag/zipball/v1.0.0">download the required JavaScript</a>. Then, include the library in your HTML's `<head>`. The CSS is optional&mdash;feel free to override it in your own pages. The Payment Tag also requires <a href="http://jquery.com/">jQuery</a>, which you'll need to include if you haven't already done so.
 
 Then, just pop the `<payment>` tag in a form. You'll need to set the `data-key` attribute to your <em>publishable key</em>, which you can get from <a href="https://manage.stripe.com/#account/apikeys">your account settings</a>.
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <script src="lib/tag.dev.js"></script>
 
     <form action="/customers" method="post">
       <payment key="your-publishable-key"></payment>
@@ -22,16 +25,7 @@ The enclosing form can, of course, contain other `<input>`s. You can embed it on
 
 ## Example
 
-Try filling out the example below with Stripe's test card number, `4242 4242 4242 4242`, any three digit CVC code, and a valid expiry date.
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
-<script src="https://raw.github.com/stripe/payment-tag/v1.0.0/lib/tag.dev.js"></script>
-
-<form class="payment-tag-example" novalidate>
-  <payment key="W1xyC0XilnJTkz52noGj1Hh0ftbg5jYO"></payment>
-
-  <button type="submit" class="button blue medium"><span>Pay with Stripe!</span></button>
-</form>
+Try filling out [the example](http://stripe.github.com/payment-tag/test/index.html) with Stripe's test card number, `4242 4242 4242 4242`, any three digit CVC code, and a valid expiry date.
 
 ## Security
 
