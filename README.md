@@ -24,6 +24,9 @@ The enclosing form can, of course, contain other `<input>`s. You can embed it on
 
 Try filling out the example below with Stripe's test card number, `4242 4242 4242 4242`, any three digit CVC code, and a valid expiry date.
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+<script src="https://raw.github.com/stripe/payment-tag/v1.0.0/lib/tag.dev.js"></script>
+
 <form class="payment-tag-example" novalidate>
   <payment key="W1xyC0XilnJTkz52noGj1Hh0ftbg5jYO"></payment>
 
