@@ -1,0 +1,55 @@
+<% if @options.address: %>
+  <div class="address">
+    <label for="paymentName">Name</label>
+    <input name="name" type="text" id="paymentName" x-autocompletetype="name" required>
+
+    <label for="paymentAddressLine1">Address</label>
+    <input name="address_line_1" type="text" id="paymentAddressLine1" x-autocompletetype="address-line1" required>
+    <input name="address_line_2" type="text" id="paymentAddressLine2" x-autocompletetype="address-line2">
+
+    <label for="paymentAddressCity">City</label>
+    <input name="address_city" type="text" id="paymentAddressCity" x-autocompletetype="city" required>
+
+    <div class="clear">
+      <div class="state">
+        <label for="paymentAddressState">State</label>
+        <input name="address_state" type="text" id="paymentAddressState" x-autocompletetype="state" required>
+      </div>
+
+      <div class="zip">
+        <label for="paymentAddressZip">Zip / Postcode</label>
+        <input name="address_zip" type="text" id="paymentAddressZip" x-autocompletetype="postal-code" required>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="message"></div>
+
+<% if @options.name and not @options.address: %>
+  <div class="name">
+    <label for="paymentName">Name</label>
+
+    <input type="text" id="paymentName" x-autocompletetype="name" required>
+  </div>
+<% end %>
+
+<div class="number">
+  <label for="paymentNumber">Card number</label>
+
+  <input type="tel" id="paymentNumber" x-autocompletetype="cc-number" required>
+</div>
+
+<div class="expiry">
+  <label for="paymentExpiryMonth">Expires<em> (mm/yy)</em></label>
+
+  <input class="expiryMonth" type="tel" id="paymentExpiryMonth" x-autocompletetype="cc-exp-month" placeholder="mm" maxlength="2" required>
+  <input class="expiryYear" type="tel" id="paymentExpiryYear" x-autocompletetype="cc-exp-year" placeholder="yy" maxlength="4" required>
+</div>
+
+<% if @options.cvc: %>
+  <div class="cvc">
+    <label for="paymentCVC">Security code</label>
+    <input type="tel" id="paymentCVC" placeholder="CVC" x-autocompletetype="cc-csc" maxlength="4" required>
+  </div>
+<% end %>

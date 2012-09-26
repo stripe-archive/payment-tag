@@ -1,0 +1,15 @@
+{
+  "name": "payment-tag",
+  "description": "Stripe <payment> tag.",
+  "version": "0.0.1",
+  "author": "maccman",
+  "repository": {
+    "type" : "git",
+    "url": "https://github.com/stripe/stripe-tag.git"
+  },
+  "main" : "./lib/stripe.tag.js",
+  "devDependencies": {
+    "zombie": "latest",
+    "vows": "latest"
+  }
+}

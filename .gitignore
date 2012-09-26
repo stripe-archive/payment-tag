@@ -1,0 +1,6 @@
+node_modules
+.DS_Store
+/.bundle/
+v1.0.0
+v1.0.0.zip
+v1*
