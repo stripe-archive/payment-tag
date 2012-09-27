@@ -39,7 +39,7 @@ Default styles are included in `assets/styles.css`. When a field fails validatio
 
 There are a number of events the `<payment>` tag triggers during its lifetime. They're all name-spaced by `payment`, and you can bind to them (using jQuery) like this:
 
-    $('payment').bind('success.payment', function () {
+    $('payment').bind('success.payment', function (e, token) {
       // ...
     });
 
