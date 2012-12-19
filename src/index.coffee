@@ -32,9 +32,13 @@ class @PaymentTag
     @setKey(@options.key) if @options.key
     @setForm(@options.form)
 
-    @$el.delegate('.number input', 'keydown', @formatNumber)
-    @$el.delegate('.number input', 'keyup', @changeCardType)
-    @$el.delegate('input[type=tel]', 'keypress', @restrictNumeric)
+    # Restrictions
+    @$el.on('keypress', '.number input', @restrictNumber)
+    @$el.on('keypress', 'input[data-numeric]', @restrictNumeric)
+
+    # Formatting
+    @$el.on('keypress', '.number input', @formatNumber)
+    @$el.on('keyup', '.number input', @changeCardType)
 
   render: ->
     @$el.html(@constructor.view(this))
@@ -162,25 +166,84 @@ class @PaymentTag
       @$form.unbind('submit.payment', @submit)
       @$form.submit()
 
+  # Restrictions
+
+  restrictNumber: (e) =>
+    digit = String.fromCharCode(e.which)
+    return unless /^\d+$/.test(digit)
+
+    # If some text is selected
+    return if @$number.prop('selectionStart')? and
+      @$number.prop('selectionStart') isnt @$number.prop('selectionEnd')
+
+    # If some text is selected in IE
+    return if document.selection?.createRange?().text
+
+    # Restrict number of digits
+    value = @$number.val() + digit
+    value = value.replace(/\D/g, '')
+
+    if Stripe.cardType(value) is 'American Express'
+      # Amex are 15 digits long
+      value.length <= 15
+    else
+      # All other cards are 16 digits long
+      value.length <= 16
+
+  restrictNumeric: (e) =>
+    # Key event is for a browser shortcut
+    return true if e.metaKey
+
+    # If keycode is a space
+    return false if e.which is 32
+
+    # If keycode is a special char (WebKit)
+    return true if e.which is 0
+
+    # If char is a special char (Firefox)
+    return true if e.which < 33
+
+    char = String.fromCharCode(e.which)
+
+    # Char is a number or a space
+    !!/[\d\s]/.test(char)
+
+  # Formatting
+
   formatNumber: (e) =>
     # Only format if input is a number
     digit = String.fromCharCode(e.which)
     return unless /^\d+$/.test(digit)
 
-    value = @$number.val()
+    value  = @$number.val()
+    type   = Stripe.cardType(value + digit)
+    length = (value.replace(/\D/g, '') + digit).length
 
-    if Stripe.cardType(value) is 'American Express'
-      lastDigits = value.match(/^(\d{4}|\d{4}\s\d{6})$/)
+    if type is 'American Express'
+      # Amex are 15 digits
+      return if length >= 15
     else
-      lastDigits = value.match(/(?:^|\s)(\d{4})$/)
+      return if length >= 16
 
-    @$number.val(value + ' ') if lastDigits
+    # Return if focus isn't at the end of the text
+    return if @$number.prop('selectionStart')? and
+      @$number.prop('selectionStart') isnt value.length
 
-  restrictNumeric: (e) =>
-    return true if e.shiftKey or e.metaKey
-    return true if e.which is 0
-    char = String.fromCharCode(e.which)
-    not /[A-Za-z]/.test(char)
+    if type is 'American Express'
+      # Amex cards are formatted differently
+      re = /^(\d{4}|\d{4}\s\d{6})$/
+    else
+      re = /(?:^|\s)(\d{4})$/
+
+    # If '4242' + 4
+    if re.test(value)
+      e.preventDefault()
+      @$number.val(value + ' ' + digit)
+
+    # If '424' + 2
+    else if re.test(value + digit)
+      e.preventDefault()
+      @$number.val(value + digit + ' ')
 
   cardTypes:
     'Visa': 'visa'

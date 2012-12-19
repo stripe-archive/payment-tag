@@ -1,7 +1,7 @@
 <% if @options.address: %>
   <div class="address">
     <label for="paymentName">Name</label>
-    <input name="name" type="text" id="paymentName" x-autocompletetype="name" required>
+    <input name="name" type="text" id="paymentName" x-autocompletetype="name" autocapitalize="words" required>
 
     <label for="paymentAddressLine1">Address</label>
     <input name="address_line_1" type="text" id="paymentAddressLine1" x-autocompletetype="address-line1" required>
@@ -30,26 +30,26 @@
   <div class="name">
     <label for="paymentName">Name</label>
 
-    <input type="text" id="paymentName" x-autocompletetype="name" required>
+    <input type="text" id="paymentName" x-autocompletetype="name" autocapitalize="words" required>
   </div>
 <% end %>
 
 <div class="number">
   <label for="paymentNumber">Card number</label>
 
-  <input type="tel" id="paymentNumber" x-autocompletetype="cc-number" required>
+  <input type="text" id="paymentNumber" pattern="\d*"  placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF;" x-autocompletetype="cc-number" required data-numeric>
 </div>
 
 <div class="expiry">
   <label for="paymentExpiryMonth">Expires<em> (mm/yy)</em></label>
 
-  <input class="expiryMonth" type="tel" id="paymentExpiryMonth" x-autocompletetype="cc-exp-month" placeholder="mm" maxlength="2" required>
-  <input class="expiryYear" type="tel" id="paymentExpiryYear" x-autocompletetype="cc-exp-year" placeholder="yy" maxlength="4" required>
+  <input class="expiryMonth" type="text" id="paymentExpiryMonth" pattern="\d*" x-autocompletetype="cc-exp-month" placeholder="mm" maxlength="2" data-numeric required>
+  <input class="expiryYear" type="text" id="paymentExpiryYear" pattern="\d*" x-autocompletetype="cc-exp-year" placeholder="yy" maxlength="4" data-numeric required>
 </div>
 
 <% if @options.cvc: %>
   <div class="cvc">
     <label for="paymentCVC">Security code</label>
-    <input type="tel" id="paymentCVC" placeholder="CVC" x-autocompletetype="cc-csc" maxlength="4" required>
+    <input type="text" id="paymentCVC" placeholder="CVC" pattern="\d*" x-autocompletetype="cc-csc" maxlength="4" data-numeric required>
   </div>
 <% end %>
