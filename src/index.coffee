@@ -38,6 +38,7 @@ class @PaymentTag
 
     # Formatting
     @$el.on('keypress', '.number input', @formatNumber)
+    @$el.on('keydown', '.number input', @formatBackNumber)
     @$el.on('keyup', '.number input', @changeCardType)
 
   render: ->
@@ -244,6 +245,16 @@ class @PaymentTag
     else if re.test(value + digit)
       e.preventDefault()
       @$number.val(value + digit + ' ')
+
+  formatBackNumber: (e) =>
+    value = @$number.val()
+
+    return if e.meta
+
+    # If we're backspacing, remove the trailing space
+    if e.which is 8 and /\s\d?$/.test(value)
+      e.preventDefault()
+      @$number.val(value.replace(/\s\d?$/, ''))
 
   cardTypes:
     'Visa': 'visa'
