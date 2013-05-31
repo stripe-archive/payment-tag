@@ -4,8 +4,8 @@
     <input name="name" type="text" id="paymentName" x-autocompletetype="name" autocapitalize="words" required>
 
     <label for="paymentAddressLine1">Address</label>
-    <input name="address_line_1" type="text" id="paymentAddressLine1" x-autocompletetype="address-line1" required>
-    <input name="address_line_2" type="text" id="paymentAddressLine2" x-autocompletetype="address-line2">
+    <input name="address_line1" type="text" id="paymentAddressLine1" x-autocompletetype="address-line1" required>
+    <input name="address_line2" type="text" id="paymentAddressLine2" x-autocompletetype="address-line2">
 
     <label for="paymentAddressCity">City</label>
     <input name="address_city" type="text" id="paymentAddressCity" x-autocompletetype="city" required>
