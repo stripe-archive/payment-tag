@@ -37,7 +37,7 @@
 <div class="number">
   <label for="paymentNumber">Card number</label>
 
-  <input type="text" id="paymentNumber" pattern="\d*"  placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF;" x-autocompletetype="cc-number" required data-numeric>
+  <input type="text" id="paymentNumber" pattern="[\d| ]*"  placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF;" x-autocompletetype="cc-number" required data-numeric>
 </div>
 
 <div class="expiry">

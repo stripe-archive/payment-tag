@@ -45,6 +45,7 @@ There are a number of events the `<payment>` tag triggers during its lifetime. T
 
 The available events are:
 
+* *ready* - the payment form has finished rendering
 * *invalid* - a field is invalid
 * *pending* - request to Stripe has been made
 * *complete* - request to Stripe has completed

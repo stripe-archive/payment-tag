@@ -50,6 +50,8 @@ class @PaymentTag
     @$expiryMonth = @$('.expiry input.expiryMonth')
     @$expiryYear  = @$('.expiry input.expiryYear')
     @$message     = @$('.message')
+
+    @trigger('ready')
     this
 
   renderToken: (token) ->
